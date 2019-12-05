@@ -14,7 +14,7 @@ public class ColumnController {
         return null;
     }
 
-    @RequestMapping(value = "getList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity getList() {
         return null;

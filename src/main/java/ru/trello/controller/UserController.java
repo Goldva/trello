@@ -26,6 +26,12 @@ public class UserController {
         return null;
     }
 
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity getList() {
+        return null;
+    }
+
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity delete(@RequestParam("id") String id) {

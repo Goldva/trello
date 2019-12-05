@@ -14,6 +14,12 @@ public class CardController {
         return null;
     }
 
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity getList() {
+        return null;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity create(@RequestBody Column column) {

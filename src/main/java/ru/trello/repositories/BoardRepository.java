@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.trello.model.Board;
 
 @Repository
-public abstract class BoardRepository implements MongoRepository<Board, String> {
+public interface BoardRepository extends MongoRepository<Board, String> {
 //    @Autowired
 //    private MongoTemplate template;
 }

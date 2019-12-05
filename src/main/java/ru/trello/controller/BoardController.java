@@ -23,7 +23,7 @@ public class BoardController {
         return new ResponseEntity<>(boardService.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "getList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Board>> getList() {
         return new ResponseEntity<>(boardService.findAll(), HttpStatus.OK);
