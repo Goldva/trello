@@ -1,12 +1,9 @@
 package ru.trello;
 
 
-import com.sun.org.glassfish.gmbal.InheritedAttribute;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.lang.annotation.Inherited;
 
 @Document(collection = "info")
 @TypeAlias("info")

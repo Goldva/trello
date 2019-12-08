@@ -9,10 +9,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Zovode</p>
         <a
-          className="App-link"
-          href="/board/getList"
-          target="_blank"
-          rel="noopener noreferrer"
+            className="App-link"
+            href="/board/getList"
+            target="_blank"
+            rel="noopener noreferrer"
         >
           Learn React
         </a>
