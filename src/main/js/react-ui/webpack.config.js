@@ -1,11 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const outputDir = path.join(__dirname, '../../../../target/classes/META-INF/resources/react-component');
+
 module.exports = {
     entry: "./src/index.js",
     output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "index_bundle.js"
+        path: outputDir,
+        filename: "app.js"
     },
     module: {
         rules: [
