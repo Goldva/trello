@@ -8,6 +8,22 @@ module.exports = {
     mode: IS_DEV ? "development" : "production",
     devtool: IS_DEV ? "eval-source-map" : "nosources-source-map",
     watch: IS_DEV,
+    devServer: {
+        hot:true,
+        proxy: {
+            "/": {
+                target: {
+                    host: "localhost",
+                    protocol: 'http:',
+                    port: 8080,
+                },
+            },
+            ignorePath: true,
+            changeOrigin: true,
+            secure: false,
+        },
+
+    },
     entry: "./src/index.js",
     output: {
         path: outputDir,
@@ -16,7 +32,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(jsx|js)?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
@@ -30,5 +46,9 @@ module.exports = {
             }
         ]
     },
-    plugins: []
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "../../webapp/index.html"
+        })
+    ]
 };
