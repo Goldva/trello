@@ -19,26 +19,26 @@ public class BoardController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Board> get(String id) {
-        return new ResponseEntity<>(boardService.findById(id), HttpStatus.OK);
+    public Board get(String id) {
+        return boardService.findById(id);
     }
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<Board>> getList() {
-        return new ResponseEntity<>(boardService.findAll(), HttpStatus.OK);
+    public List<Board> getList() {
+        return boardService.findAll();
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Board> create(@RequestBody Board board) {
-        return new ResponseEntity<>(boardService.save(board), HttpStatus.OK);
+    public Board create(@RequestBody Board board) {
+        return boardService.save(board);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<Board> edit(@RequestBody Board board) {
-        return new ResponseEntity<>(boardService.save(board), HttpStatus.OK);
+    public Board edit(@RequestBody Board board) {
+        return boardService.save(board);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)

@@ -27,7 +27,7 @@ export class ButtonKit extends PureComponent {
     };
 
     render() {
-        const {label, onClick, color, size, dataTest, icon, className, disabled} = this.props;
+        const {ref, label, onClick, color, size, dataTest, icon, className, disabled} = this.props;
         let sizeIcon = (size === 's') ? 16 : (size === 'm') ? 20 : (size === 'l') ? 24 : (size === 'xl') ? 34 : (size === 'xxl') ? 48 : null;
         const classes = classNames(`btn-${color}`, `btn-${size}`, className, {
             '-has-no-label': !label,
@@ -40,6 +40,7 @@ export class ButtonKit extends PureComponent {
                 className={classes}
                 disabled={disabled}
                 onClick={onClick}
+                tabIndex="-1"
             >
                 <div className='tf-kit-button-content'>
                     {label &&
