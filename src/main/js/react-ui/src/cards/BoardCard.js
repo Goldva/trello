@@ -6,38 +6,78 @@ import {InputKit as Input} from "../common/InputKit";
 
 export class BoardCard extends PureComponent{
     propTypes = {
-        boardId: PropTypes.any
+        board: PropTypes.any
     };
     state = {
-        data:{},
         columnName: '',
-        isCreateColumn: false
+        isCreateColumn: false,
+        activeColumn: '',
+        columns: ''
     };
-    constructor() {
-        super();
-        let url = '';
-        axios.get(url)
+
+    componentWillMount() {
+        const { board } = this.props;
+        let url = '/column/getList';
+        axios.get(url, {params:{boardId:board.id}})
             .then(res => {
-                this.setState({data: res.data})
+                this.setState({columns: res.data})
             })
     }
 
     createColumn = () => {
+        const {board} = this.props;
+        const {columnName} = this.state;
+        let data = {name: columnName, board: board};
+        let url = '/column/create';
+        axios.post(url, data)
+            .then(() => { this.setState({isCreateColumn: false})})
+    };
 
-    }
+    createCard = (event) => {
+        const {value} = event.target;
+        const {activeColumn, columns} = this.state;
+        let data = {name: value, card: columns[activeColumn]};
+        let url = '/card/create';
+        axios.post(url, data)
+            .then(() => {this.setState({activeColumn: ''})})
+
+    };
+
+    getItemsCard = (columnIndex, item) => {
+        const {activeColumn} = this.state;
+        return (
+            <div style={{display:'inline-block', margin:'10px'}}>
+                <div>
+                    <span>{item.name}</span>
+                    { activeColumn !== columnIndex && (
+                        <Button label={'Добавить еще одну карточку'}
+                                onClick={()=>{
+                                    this.setState({activeColumn: columnIndex})
+                                }}/>
+                    )}
+                    { activeColumn === columnIndex &&
+                        <Input placeholder={'Введите заголовок для карточки'} onBlur={this.createCard}/>
+                    }
+                </div>
+            </div>
+        )
+    };
+
     render() {
-        const {data} = this.props;
-        const {isCreateColumn} = this.state;
+        const {columns, isCreateColumn, columnName} = this.state;
         return(
             <div>
+                {columns && columns.map((item, index) => this.getItemsCard(index, item))}
                 { !isCreateColumn && (
-                    <Button label={'Создать новую колонку'} onClick={}/>
+                    <div style={{display:'inline-block', margin:'10px'}}>
+                        <Button label={'Создать новую колонку'} onClick={() => this.setState({isCreateColumn: true})}/>
+                    </div>
                 )}
 
                 { isCreateColumn &&
                     <div>
-                        <Input value={boardName} placeholder={'Введите заголовок списка'} onChange={(value => this.setState({boardName: value}))}/>
-                        <Button label={'Добавить'} onClick={this.createBoard}/>
+                        <Input value={columnName} placeholder={'Введите заголовок списка'} onChange={(event => this.setState({columnName: event.target.value}))}/>
+                        <Button label={'Добавить'} onClick={this.createColumn}/>
                     </div>
                 }
             </div>

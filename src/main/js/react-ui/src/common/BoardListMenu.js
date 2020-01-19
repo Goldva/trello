@@ -9,7 +9,7 @@ export class BoardListMenu extends PureComponent {
         displayMenu: false,
         isCreateBoardPopup: false,
         boardName: '',
-        currentBoardId: ''
+        currentBoard: ''
     };
 
     showBoardList = (event) => {
@@ -29,29 +29,31 @@ export class BoardListMenu extends PureComponent {
             () => {document.removeEventListener('click', this.hideBoardList)})
     };
 
-    createBoard = (value) => {
+    createBoard = () => {
         const { boardName } = this.state;
-        let requestdata = {
+        let requestData = {
             name: boardName
         };
         const URL = '/board/create';
-        axios.post(URL, requestdata)
+        axios.post(URL, requestData)
             .then(() => {
                 this.setState({boardName: '', isCreateBoardPopup: false})
             })
     };
 
-    getItem = (item) => {
+    getItem = (index, item) => {
         return (
-            <li id={item.id} onClick={(value) => this.selectBoard(value)}>{item.name}</li>
+            <li id={index} onClick={(value) => this.selectBoard(value)}>{item.name}</li>
         )
     };
 
     selectBoard = (value) => {
-        this.setState({currentBoardId: value.target.id});
+        const {data} = this.state;
+        this.setState({currentBoard: data[value.target.id]});
     };
+
     render() {
-        const {displayMenu, isCreateBoardPopup, boardName, data, currentBoardId} = this.state;
+        const {displayMenu, isCreateBoardPopup, boardName, data, currentBoard} = this.state;
 
         return (
             <div>
@@ -60,17 +62,17 @@ export class BoardListMenu extends PureComponent {
                 { displayMenu && (
                     <div>
                         <ul>
-                            {data && data.map(item => this.getItem(item))}
+                            {data && data.map((item , index)=> this.getItem(index, item))}
                             <li>
                                 <Button size={'m'} label={'Создать новую доску'} onClick={() => this.setState({isCreateBoardPopup:true})}/>
                             </li>
                         </ul>
                     </div>
                 )}
-                {currentBoardId && (<BoardCard boardId={currentBoardId}/>)}
+                {currentBoard && (<BoardCard board={currentBoard}/>)}
                 { isCreateBoardPopup &&
                     <div>
-                        <Input value={boardName} placeholder={'Добавить заголовок доски'} onChange={(value => this.setState({boardName: value}))}/>
+                        <Input value={boardName} placeholder={'Добавить заголовок доски'} onChange={(event => this.setState({boardName: event.target.value}))}/>
                         <Button label={'Сохранить'} onClick={this.createBoard}/>
                         <Button label={'Отмена'} onClick={() => {this.setState({isCreateBoardPopup:false})}}/>
                     </div>

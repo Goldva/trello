@@ -8,13 +8,14 @@ export class InputKit extends PureComponent{
         placeholder: PropTypes.string,
         value: PropTypes.any,
         disabled: PropTypes.bool,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onBlur: PropTypes.func
 
     };
 
     render() {
         const {
-            label, placeholder, value, disabled, width, onChange, ...other
+            label, placeholder, value, disabled, width, onChange, onBlur, ...other
         } = this.props;
 
         return (
@@ -30,7 +31,8 @@ export class InputKit extends PureComponent{
                         placeholder={placeholder}
                         value={value}
                         disabled={disabled}
-                        onChange={event => onChange(event.target.value)}
+                        onChange={onChange ? onChange : () => {}}
+                        onBlur={onBlur ? onBlur : () => {}}
                     />
                 </div>
             </div>

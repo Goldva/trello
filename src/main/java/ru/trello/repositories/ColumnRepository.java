@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ColumnRepository extends MongoRepository<Column, String> {
-    @Query("{'boardId': :boardId}")
+    @Query("{'boardId': :#{#boardId}}")
     List<Column> findByBoardId(@Param("boardId") String boardId);
 }

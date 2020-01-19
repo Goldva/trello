@@ -24,20 +24,20 @@ public class ColumnController {
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ResponseBody
-    public List<Column> getList(@RequestParam(value = "id", required = false) String id) {
-        return StringUtils.isBlank(id) ? repository.findAll() : repository.findByBoardId(id);
+    public List<Column> getList(@RequestParam(value = "boardId", required = false) String boardId) {
+        return StringUtils.isBlank(boardId) ? repository.findAll() : repository.findByBoardId(boardId);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity create(@RequestBody Column column) {
-        return null;
+    public Column create(@RequestBody Column column) {
+        return repository.save(column);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity edit(@RequestBody Column column) {
-        return null;
+    public Column edit(@RequestBody Column column) {
+        return repository.save(column);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
