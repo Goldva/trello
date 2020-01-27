@@ -13,7 +13,6 @@ export class BoardListMenu extends PureComponent {
     };
 
     showBoardList = (event) => {
-        event.preventDefault();
         let url = '/board/getList';
         axios.get(url).then((res) => {
             this.setState({

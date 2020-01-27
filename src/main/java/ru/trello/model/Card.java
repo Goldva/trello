@@ -10,7 +10,7 @@ public class Card extends BaseDocument {
     private String name;
 
     @DBRef
-    private Card card;
+    private Column column;
 
     public String getName() {
         return name;
@@ -20,11 +20,11 @@ public class Card extends BaseDocument {
         this.name = name;
     }
 
-    public Card getCard() {
-        return card;
+    public Column getColumn() {
+        return column;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setColumn(Column column) {
+        this.column = column;
     }
 }

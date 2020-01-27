@@ -15,8 +15,8 @@ export class BoardCard extends PureComponent{
         columns: ''
     };
 
-    componentWillMount() {
-        const { board } = this.props;
+    componentWillReceiveProps(nextProps, nextContext) {
+        const { board } = nextProps;
         let url = '/column/getList';
         axios.get(url, {params:{boardId:board.id}})
             .then(res => {
@@ -26,17 +26,20 @@ export class BoardCard extends PureComponent{
 
     createColumn = () => {
         const {board} = this.props;
-        const {columnName} = this.state;
+        const {columnName, columns} = this.state;
         let data = {name: columnName, board: board};
         let url = '/column/create';
         axios.post(url, data)
-            .then(() => { this.setState({isCreateColumn: false})})
+            .then((res) => {
+                columns.push(res.data);
+                this.setState({isCreateColumn: false});
+            })
     };
 
     createCard = (event) => {
         const {value} = event.target;
         const {activeColumn, columns} = this.state;
-        let data = {name: value, card: columns[activeColumn]};
+        let data = {name: value, column: columns[activeColumn]};
         let url = '/card/create';
         axios.post(url, data)
             .then(() => {this.setState({activeColumn: ''})})
@@ -75,7 +78,7 @@ export class BoardCard extends PureComponent{
                 )}
 
                 { isCreateColumn &&
-                    <div>
+                    <div style={{display:'inline-block', margin:'10px'}}>
                         <Input value={columnName} placeholder={'Введите заголовок списка'} onChange={(event => this.setState({columnName: event.target.value}))}/>
                         <Button label={'Добавить'} onClick={this.createColumn}/>
                     </div>

@@ -11,8 +11,6 @@ import java.util.List;
 public class Column  extends BaseDocument {
     @DBRef
     private Board board;
-    @DBRef
-    private List<Card> cards;
     private String name;
 
     public Board getBoard() {
@@ -21,14 +19,6 @@ public class Column  extends BaseDocument {
 
     public void setBoard(Board board) {
         this.board = board;
-    }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
     }
 
     public String getName() {
