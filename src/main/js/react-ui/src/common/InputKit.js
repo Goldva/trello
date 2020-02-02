@@ -9,13 +9,13 @@ export class InputKit extends PureComponent{
         value: PropTypes.any,
         disabled: PropTypes.bool,
         onChange: PropTypes.func,
-        onBlur: PropTypes.func
-
+        onBlur: PropTypes.func,
+        type:PropTypes.string
     };
 
     render() {
         const {
-            label, placeholder, value, disabled, width, onChange, onBlur, ...other
+            type, label, placeholder, value, disabled, width, onChange, onBlur, ...other
         } = this.props;
 
         return (
@@ -26,7 +26,7 @@ export class InputKit extends PureComponent{
                 <div>
                     <input
                         {...other}
-                        type="text"
+                        type={type ? type : "text"}
                         style={{width: width + 'px'}}
                         placeholder={placeholder}
                         value={value}
