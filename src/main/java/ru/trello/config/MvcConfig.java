@@ -13,6 +13,13 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
 //    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry){
+//        registry.addResourceHandler("/**")
+//                .addResourceLocations("/")
+//                .setCachePeriod(0);
+//    }
+
+//    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/login")
 //                .addResourceLocations("/login.html");

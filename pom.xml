@@ -69,7 +69,7 @@
                             <outputDirectory>${project.build.directory}/classes/META-INF/resources</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/webapp</directory>
+                                    <directory>src/main/resource</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>
