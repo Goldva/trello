@@ -23,6 +23,13 @@ export class BoardListMenu extends PureComponent {
         })
     };
 
+    loguot = () => {
+        let url = '/logout';
+        axios.get(url).then((res) => {
+            console.log("logout", res);
+        })
+    };
+
     hideBoardList = () => {
         this.setState({displayMenu:false},
             () => {document.removeEventListener('click', this.hideBoardList)})
@@ -56,8 +63,9 @@ export class BoardListMenu extends PureComponent {
 
         return (
             <div>
-                <div onClick={this.showBoardList}> Доски
-                </div>
+                <div onClick={this.showBoardList}> Доски</div>
+                <div onClick={this.loguot}> Выход</div>
+
                 { displayMenu && (
                     <div>
                         <ul>

@@ -18,13 +18,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/react-component/**").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/api/login")
+                .defaultSuccessUrl("/")
+//                .loginProcessingUrl("/api/login")
                 .permitAll();
+
+        http.csrf().disable();
 
         http.logout()
                 .permitAll();

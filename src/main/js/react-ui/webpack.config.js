@@ -45,10 +45,5 @@ module.exports = {
                 loader: 'svg-inline-loader'
             }
         ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "../../webapp/index.html"
-        })
-    ]
+    }
 };
