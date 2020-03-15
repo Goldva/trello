@@ -5,19 +5,15 @@ import axios from "axios";
 
 export class Login extends PureComponent {
     state = {
-        username:'',
-        password:''
+        username:'u',
+        password:'p'
     };
 
-    login = () => {
-        const {username, password} = this.state;
+    login = (event) => {
+        event.preventDefault();
+        let data = new FormData(event.target);
 
-        let data = {
-            user: username,
-            password: password
-        };
-
-        axios.post('/login', data)
+        axios({method:"post", url:'/login', data:data})
             .then(res =>{
                 console.log("res",res);
             })
@@ -26,25 +22,24 @@ export class Login extends PureComponent {
             })
     };
     render() {
-        const {username, password} = this.state;
-
+        let {username, password} = this.state;
         return (
-            <div>
+            <form onSubmit={this.login}>
                 <Input type={"text"}
-                       placeholder={"Login"}
+                       name={"username"}
+                       placeholder={"Login a"}
                        value={username}
                        onChange={(event => this.setState({username: event.target.value}))}
                 />
                 <Input type={"password"}
+                       name={"password"}
                        placeholder={"password"}
                        value={password}
                        onChange={(event => this.setState({password: event.target.value}))}
                 />
                 <Button label={"Вход"}
-                        onClick={this.login}
-                />
-
-            </div>
+                        type={"submit"}/>
+            </form>
         )
     }
 }

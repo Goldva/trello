@@ -24,10 +24,11 @@ export class ButtonKit extends PureComponent {
 
             /** @ignore */
         onClick: PropTypes.func,
+        type:PropTypes.string
     };
 
     render() {
-        const {ref, label, onClick, color, size, dataTest, icon, className, disabled} = this.props;
+        const {type, label, onClick, color, size, dataTest, icon, className, disabled} = this.props;
         let sizeIcon = (size === 's') ? 16 : (size === 'm') ? 20 : (size === 'l') ? 24 : (size === 'xl') ? 34 : (size === 'xxl') ? 48 : null;
         const classes = classNames(`btn-${color}`, `btn-${size}`, className, {
             '-has-no-label': !label,
@@ -36,7 +37,7 @@ export class ButtonKit extends PureComponent {
         return (
             <button
                 data-test={dataTest}
-                type="button"
+                type={type ? type : "button"}
                 className={classes}
                 disabled={disabled}
                 onClick={onClick}

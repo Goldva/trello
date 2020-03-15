@@ -10,12 +10,13 @@ export class InputKit extends PureComponent{
         disabled: PropTypes.bool,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
-        type:PropTypes.string
+        type:PropTypes.string,
+        name:PropTypes.string
     };
 
     render() {
         const {
-            type, label, placeholder, value, disabled, width, onChange, onBlur, ...other
+            name, type, label, placeholder, value, disabled, width, onChange, onBlur, ...other
         } = this.props;
 
         return (
@@ -33,6 +34,7 @@ export class InputKit extends PureComponent{
                         disabled={disabled}
                         onChange={onChange ? onChange : () => {}}
                         onBlur={onBlur ? onBlur : () => {}}
+                        name={name}
                     />
                 </div>
             </div>
